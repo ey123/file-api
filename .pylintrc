@@ -1,0 +1,4 @@
+[MASTER]
+disable=R0801
+[BASIC]
+good-names=i, j, k, f, ex, Run, df, l, l1, l2, l3
