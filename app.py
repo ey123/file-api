@@ -123,7 +123,8 @@ class Blob(Resource):
         except FileNotFoundError:
             return {"status": "error", "message": "File not found"}, 404
 
-@api.route("/tree/", defaults={'path': ''})
+
+@api.route("/tree/", defaults={"path": ""})
 @api.route("/tree/<path:path>")
 @api.doc(params={"path": "A Path"})
 class Tree(Resource):
@@ -144,4 +145,4 @@ class Tree(Resource):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7777))
-    app.run(host='0.0.0.0', debug=True, port=port)
+    app.run(host="0.0.0.0", debug=True, port=port)
