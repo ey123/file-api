@@ -104,12 +104,11 @@ class FileApi:
         If the directory is found, list its contents
         """
         if not os.path.isdir(folder):
-            raise NotADirectoryError
+            raise InvalidTypeError
         return [
             {
                 "name": f,
-                "type": "f" if isfile(join(folder, f)) else "d",
-                "path": join(folder, f),
+                "type": "file" if isfile(join(folder, f)) else "directory",
             }
             for f in os.listdir(folder)
         ]

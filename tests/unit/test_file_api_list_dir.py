@@ -4,6 +4,7 @@ import unittest
 import shutil
 
 from services.file_api import FileApi
+from services.file_api import InvalidTypeError
 from tests.test_utils import pub_dir, PUBLIC_DIR
 
 
@@ -33,9 +34,9 @@ class TestListDir(unittest.TestCase):
         """ensure that the function lists the dir"""
         dir_content = self.file_api.list_dir(self.test_dir)
         result = [
-            ("subdir", "d"),
-            ("test_file0.txt", "f"),
-            ("test_file1.txt", "f"),
+            ("subdir", "directory"),
+            ("test_file0.txt", "file"),
+            ("test_file1.txt", "file"),
         ]
         # iterate over the result and check that each file is in the dir_content with it's type
         for file in result:
@@ -60,7 +61,7 @@ class TestListDir(unittest.TestCase):
 
     def test_list_dir_exsiting_file_file(self):
         """ensure that the function raises a NotADirectoryError for an existing file"""
-        with self.assertRaises(NotADirectoryError):
+        with self.assertRaises(InvalidTypeError):
             self.file_api.list_dir("test_dir/test_file1.txt")
 
     def test_update_nonexistent_file(self):
